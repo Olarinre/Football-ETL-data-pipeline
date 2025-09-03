@@ -1,8 +1,7 @@
-from dotenv import load_dotenv
 import psycopg2
 import os
 from dotenv import load_dotenv
-from sqlmodel import SQLModel, create_engine, Session, Field
+from sqlmodel import Column, SQLModel, create_engine, Session, Field, Integer, String
 
 
 
@@ -10,9 +9,12 @@ from sqlmodel import SQLModel, create_engine, Session, Field
 
 class Tabledata(SQLModel, table=True):
     id: int = Field(default=None, primary_key=True)
-    name: str
-    team: str
-    goals: int = 0
+    position: int = Field(sa_column=Column("position", Integer, nullable=False))
+    team_name: str = Field(sa_column=Column("team_name", String, nullable=False))
+    matches: int = Field(sa_column=Column("matches", Integer, nullable=False))
+    points: int = Field(sa_column=Column("points", Integer, nullable=False))
+    score_diff: int = Field(sa_column=Column("score_diff", Integer, nullable=False))
+    goals: int = Field(sa_column=Column("goals", Integer, nullable=False))
 
 
 load_dotenv
